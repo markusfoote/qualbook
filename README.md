@@ -12,6 +12,7 @@ A brief overview of the filetypes and instructions for building a complete manua
 ### How do I get set up? ###
 
 This repository uses LaTeX to typeset a book-like document 
+
 * Configuration
 * Dependencies
 * Database configuration
@@ -21,5 +22,6 @@ This repository uses LaTeX to typeset a book-like document
 
 ### Who do I talk to? ###
 Authors:
+
 * Markus Foote
-* Blake Zimmerman 
+* Blake Zimmerman
