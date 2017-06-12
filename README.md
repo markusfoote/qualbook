@@ -11,13 +11,7 @@ A brief overview of the filetypes and instructions for building a complete manua
 
 ### How do I get set up? ###
 
-This repository uses LaTeX to typeset a book-like document 
-
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+This repository uses LaTeX to typeset a book-like document. Using the TexLive distribution is recommended. 
 
 
 ### Who do I talk to? ###
