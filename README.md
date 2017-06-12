@@ -1,3 +1,5 @@
+[![forthebadge](http://forthebadge.com/images/badges/powered-by-netflix.svg)](http://forthebadge.com)
+
 # PhD Qualifing Exam Study Book README #
 
 This README outlines the structure and topics of a study manual for the 2017 University of Utah Bioengineering Imaging Track PhD Qualifing Exam.
