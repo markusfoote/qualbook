@@ -1,4 +1,6 @@
 [![forthebadge](http://forthebadge.com/images/badges/powered-by-netflix.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/designed-in-etch-a-sketch.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/made-with-crayons.svg)](http://forthebadge.com)
 
 # PhD Qualifing Exam Study Book README #
 
