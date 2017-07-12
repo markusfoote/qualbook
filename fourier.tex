@@ -9,24 +9,30 @@ g(t)=\mathcal{F}^{-1}\left\{G(f)\right\} = \frac{1}{2\pi}\int_{-\infty}^{\infty}
 These definitions are not unique, especially in the handling of the normalizing factors; it is also common to see a $\sfrac{1}{\sqrt{2\pi}}$ coefficient in \emph{both} forward and inverse operations.
 
 The Fourier transform can also be considered as a linear operation (which it is), in terms of vectors and matrices.
-%TODO example here
+
+\todo{examples here}
 
 The Fourier transform has many useful properties, some of which are listed in Table \ref{tab:fourierProperties} .
 
 \begin{table}
 	\caption{\label{tab:fourierProperties} Fourier Transform Properties}
 	{\renewcommand{\arraystretch}{2}%
-	\begin{tabular}{|c|c|l|}
+	\begin{tabular}{|c|M{6.5cm}|p{4.5cm}|}
 		\hline
-		Linearity& $\mathcal{F}\left\{\alpha\, g_1(t) + \beta\, g_2(t)\right\} = \alpha\, G_1(f) + \beta\, G_2(f)$ & Note: $\alpha$, $\beta$ may be complex.\\
+		{\textbf{Name}} & {\textbf{Formula}} &{\textbf{Notes}} \\
+		\hline\hline
+		Linearity& $\mathcal{F}\left\{\alpha\, g_1(t) + \beta\, g_2(t)\right\} = \alpha\, G_1(f) + \beta\, G_2(f)$ & $\alpha$, $\beta$ may be complex.\\
 		\hline
-		Scaling & mote & and more\\
+		Scaling & $\mathcal{F}\left\{g(\alpha t) \right\} = \frac{1}{|\alpha|}G(\frac{f}{\alpha})$& $\alpha > 1$ compresses $g$ in time $\to$ expands in frequency\\
 		\hline
-		Duality && \\
+		Duality & $\mathcal{F}\left\{G(t)\right\}=g(-f)$& \\
 		\hline
-		Shifting &  &\\
+		Shifting & $\mathcal{F}\left\{g(t-\tau)\right\}= G(f) e^{-i2\pi f\tau}$  & \\
 		\hline
-		Convolution &  &\\
+		Convolution & 
+		{$\begin{aligned}%
+		\mathcal{F}\left\{ g_1(t) \circledast g_2(t)\right\} & =  G_1(f) \cdot G_2(f) \\ \mathcal{F}\left\{ g_1(t) \cdot g_2(t)\right\} & = G_1(f) \circledast G_2(f)
+		\end{aligned}$}&\\
 		\hline
 	\end{tabular}}
 	
