@@ -1,4 +1,9 @@
 \documentclass{book}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xfrac}
+
 \title{Bioengineering Imaging Track Qualifying Exam Study Book}
 \author{Markus Foote and Blake Zimmerman}
 
@@ -6,9 +11,9 @@
 	\maketitle
 	\tableofcontents
 		\part{Essential Mathematics}
-			\chapter{Fourier Theory}
-			\chapter{Convolution}
-			\chapter{Signal Processing}
+			\chapter{Fourier Theory} \input{fourier}
+			\chapter{Convolution} \input{convolution}
+			\chapter{Signal Processing} \input{signals}
 			\chapter{Discrete Representations}
 				\section{Derivatives}
 					\subsection{Gradient}
@@ -42,6 +47,7 @@
 		\part{CT}
 			\chapter{CT Physics}
 				\section{X-Ray Physics}
+					\input{xray}
 				\section{Sampling Theorem}
 				\section{Image Formation and Image Quality}
 					\subsection{Resolution}

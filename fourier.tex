@@ -1,0 +1,34 @@
+The {\em Fourier transform} is analogous to the separation of white light into a rainbow by a prism. This mathematical operator has many useful applications in imaging. We define the Fourier transform of a function $g$ as
+\begin{equation}
+G(f)=\mathcal{F}\left\{g(t)\right\} = \int_{-\infty}^{\infty} g(t) e^{-i2\pi ft}\, dt \;.
+\end{equation}
+We define the inverse of this operation as
+\begin{equation}
+g(t)=\mathcal{F}^{-1}\left\{G(f)\right\} = \frac{1}{2\pi}\int_{-\infty}^{\infty} G(f) e^{i2\pi ft}\, df \;.
+\end{equation}
+These definitions are not unique, especially in the handling of the normalizing factors; it is also common to see a $\sfrac{1}{\sqrt{2\pi}}$ coefficient in \emph{both} forward and inverse operations.
+
+The Fourier transform can also be considered as a linear operation (which it is), in terms of vectors and matrices.
+%TODO example here
+
+The Fourier transform has many useful properties, some of which are listed in Table \ref{tab:fourierProperties} .
+
+\begin{table}
+	\caption{\label{tab:fourierProperties} Fourier Transform Properties}
+	{\renewcommand{\arraystretch}{2}%
+	\begin{tabular}{|c|c|l|}
+		\hline
+		Linearity& $\mathcal{F}\left\{\alpha\, g_1(t) + \beta\, g_2(t)\right\} = \alpha\, G_1(f) + \beta\, G_2(f)$ & Note: $\alpha$, $\beta$ may be complex.\\
+		\hline
+		Scaling & mote & and more\\
+		\hline
+		Duality && \\
+		\hline
+		Shifting &  &\\
+		\hline
+		Convolution &  &\\
+		\hline
+	\end{tabular}}
+	
+\end{table}
+
