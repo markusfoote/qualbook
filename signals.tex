@@ -1,3 +1,15 @@
-\subsection{LTI}
+\subsection{LTI Systems Definitions}
+Systems theory is largely based on the assumption that a system being inspected is \emph{Linear and Time or Translation-Invariant}, or LTI. This property of a system is satisfied by these two requirements: 
+\begin{enumerate}
+	\item Linear: a scaled input produces a same-scaled output.
+	\item Time/Translation-Invariant: a delayed (or earlier) input produces a delayed (or earlier) output which is otherwise identical to the output from the non-delayed input.
+\end{enumerate}
+The LTI system property makes the input-output relationship more predictable. However, this condition is fairly easy to break; for example, the magnitude-calculation "system" is \emph{not} something \todo{linear/time invariant}: $h(x+iy) = \sqrt{x^2 + y^2} \neq  h(\alpha ...)$
 
 \subsection{System Response}
+For an LTI system, the output is well-defined from the input, $x$ and the system's impulse response, $h(\delta(t))$. The output, $y$, is easily calculated as $h(t)\circledast x(t)$. Using the convolution theorem of the Fourier transform, this output can also be calculated in the frequency domain: $Y(f) = H(f)\cdot X(f)$ and the output in time is easily calculated through an inverse Fourier transform. This approach is typically employed when the steady-state output of a system is desired. The Fourier transform-based approach is advantageous because it is less computationally-intensive than a convolution. However, the convolution-based approach is necessary in the following cases:
+\begin{enumerate}
+	\item Solution for output before the system reaches steady-state is required.
+	\item Real-time output is required.
+\end{enumerate}
+Additionally, the convolution-based approach is computationally advantageous when the kernel is relatively short.
