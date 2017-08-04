@@ -1,0 +1,90 @@
+An \emph{affine transform} is the combination of a \underline{linear} transformation with a \underline{translation}. In a linear algebra contest, a point in space is a column vector of individual values along each dimension, i.e. $\left[\begin{matrix}x\\y\end{matrix}\right]$ or $\left[\begin{matrix}x\\y\\z\end{matrix}\right]$ in 2 or 3 dimensions, respectively. This location is noted simply as $\vec{x}$.
+
+The affine transform can thus be written as a matrix-vector multiplication, followed by vector addition:
+\begin{equation}
+\vec{y} = \mathbf{A}\vec{x} + \vec{b}
+\end{equation}
+
+The linear transformation matrix $\mathbf{A}$ has some important special cases:
+\begin{description}
+	\item[Scaling] This transformation scales each direction of a vector space by the corresponding $c$ value: $$\mathbf{A}=\left[\begin{matrix}
+	c_x & 0 \\ 0 & c_y
+	\end{matrix}\right] \text{ or } \left[\begin{matrix}
+	c_x & 0 &0\\ 0 & c_y &0\\ 0&0&c_z
+	\end{matrix}\right]$$
+	
+	\item[Rotation] This transformation rotates by an angle $\theta$ about the origin in 2 dimensions:$$\mathbf{A}=\left[\begin{matrix}
+	\cos(\theta) & -\sin(\theta) \\\sin(\theta) & \cos(\theta)
+	\end{matrix}\right]$$ 
+
+	\item[Translation] This only translates all the points by a constant amount:$$\mathbf{A}=\left[\begin{matrix}
+	1 & 0 \\0 &1
+	\end{matrix}\right] \text{ and } b=\left[\begin{matrix}t_x\\t_y\end{matrix}\right]$$
+	
+	\item[Skew]
+	
+	\item[Others?]
+	
+\end{description}
+
+These transformations are all well and good, but with them so far we can only take points and apply some fun tricks to move them around in cute ways. What if there were \underline{pairs} of points with \emph{known} (or \emph{assumed}) correspondence, and we want to find an affine transform that makes the point pairs \underline{match}?
+
+Using notation:
+\begin{align}
+\vec{x}_i &\; &\text{source point(s)}\\
+\vec{y}_i & &\text{target point(s)}\\
+n && \text{total number of point pairs}\\
+\mathbf{\mathbf{A}}& & \text{linear transform matrix}\\
+T & &\text{translation vector}
+\end{align}
+
+In a perfect world, all the points match exactly after being transformed, such that 
+\begin{equation}
+\vec{y}_i = \mathbf{A} \vec{x}_i +T
+\end{equation}
+is satisfied. This linear system of equations could be easily solved with some linear algebra.
+
+However, this world is not perfect. Due to noise, human error, systematic error, and spilling coffee on samples before \emph{carefully} wiping it up, there will be noise and the points will not exactly match. There will be some error. We must account for this error.
+
+We want to estimate the best transformation given some number of point pairs that will not all match exactly. Thus, we should minimize the error in the matching using a euclidean distance for the error, and squared error so that this function is convex (which is important when very close to zero error):
+\begin{equation}
+\underset{\mathbf{A},T}{\min}\sum_i\left\|(\mathbf{A}\vec{x}_i + T) - \vec{y}_i\right\|^2
+\end{equation}
+
+\textbf{How do we solve this?}
+
+First, if we are given $\mathbf{A}$, then 
+\begin{equation}
+\delta T = 2 \sum_i^n \left(\mathbf{A}\vec{x}_i + T-\vec{y}_i\right) = 0
+\end{equation}
+The variation of T is set to zero because the first derivative of a function is zero at a minimum.
+Solving for $T$:
+\begin{equation}
+T=\frac{1}{n}\sum_{i=1}^N \left(\vec{y}_i-\mathbf{A}\vec{x}_i\right)
+\end{equation}
+This translation is simply the difference of the centroids of the source and target points. Let us define
+\begin{align}
+\tilde{y}_i &= \vec{y}_i - \vec{c}_y\\
+\tilde{x}_i &= \vec{x}_i - \vec{c}_x
+\end{align}
+where $c_x$ and $c_y$ are the centroids of each point set. This modification of the problem implicitly removes $T$ since both point sets will have the same centroid (the origin).
+
+Assuming the points are centered the problem
+\begin{equation}
+\underset{\mathbf{A}}{\min}\sum_i\left\|\mathbf{A}\left(\vec{x}_i-\frac{1}{n}\sum_j \vec{x}_j\right) - \left(\vec{y}_i-\frac{1}{n}\sum_j \vec{y}_j\right)\right\|^2
+\end{equation}
+simplifies to
+\begin{equation}
+\underset{\mathbf{A}}{\min}\sum_i\left\|\mathbf{A}\tilde{x}_i - \tilde{y}_i\right\|^2
+\end{equation}
+Similar to the procedure performed to find and remove $T$, we now find the variation of $\mathbf{A}$ and set it equal to zero:
+\begin{equation}
+\frac{\partial}{\partial\mathbf{A}} = 2 \sum_i \left(\mathbf{A}\tilde{x}_i-\tilde{y}_i\right)\, \tilde{x}_i^T = 0
+\end{equation}
+Then solving for $\mathbf{A}$:
+\begin{equation}
+\mathbf{A}=\left(\sum_i\tilde{x}_i\tilde{x}_i^T\right)^{-1}\left(\sum_i\tilde{y}_i\tilde{x}_i^T\right)
+\end{equation}
+
+A special note here about the matrix $\sum_i\tilde{x}_i\tilde{x}_i^T$: A minimum of 3 non-co-linear points in 2D (or 4 non-coplanar points in 3D) are required for this matrix to be invertible. 
+

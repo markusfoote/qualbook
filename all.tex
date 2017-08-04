@@ -1,0 +1,33 @@
+\documentclass{report}
+
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xfrac}
+\usepackage{todonotes}
+\usepackage{array}
+
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+\titleformat{\chapter}{\normalfont\huge}{\thechapter.}{30pt}{\huge}
+
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\title{Bioengineering Imaging Track Qualifying Exam Study Book}
+\author{Markus Foote and Blake Zimmerman}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\chapter{Affine Transform}
+	\input{affine}
+	
+	\chapter{Magnetic Resonance Imaging}
+	\input{MRI_question}
+	
+\end{document}
