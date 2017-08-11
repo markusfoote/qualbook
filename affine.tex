@@ -1,3 +1,5 @@
+\section{General Transformation Concept}
+
 An \emph{affine transform} is the combination of a \underline{linear} transformation with a \underline{translation}. In a linear algebra contest, a point in space is a column vector of individual values along each dimension, i.e. $\left[\begin{matrix}x\\y\end{matrix}\right]$ or $\left[\begin{matrix}x\\y\\z\end{matrix}\right]$ in 2 or 3 dimensions, respectively. This location is noted simply as $\vec{x}$.
 
 The affine transform can thus be written as a matrix-vector multiplication, followed by vector addition:
@@ -27,6 +29,8 @@ The linear transformation matrix $\mathbf{A}$ has some important special cases:
 	
 \end{description}
 
+\section{The Imperfect World}
+
 These transformations are all well and good, but with them so far we can only take points and apply some fun tricks to move them around in cute ways. What if there were \underline{pairs} of points with \emph{known} (or \emph{assumed}) correspondence, and we want to find an affine transform that makes the point pairs \underline{match}?
 
 Using notation:
@@ -51,7 +55,7 @@ We want to estimate the best transformation given some number of point pairs tha
 \underset{\mathbf{A},T}{\min}\sum_i\left\|(\mathbf{A}\vec{x}_i + T) - \vec{y}_i\right\|^2
 \end{equation}
 
-\textbf{How do we solve this?}
+\section{Estimating a Solution}
 
 First, if we are given $\mathbf{A}$, then 
 \begin{equation}
