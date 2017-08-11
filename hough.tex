@@ -17,7 +17,7 @@ The Hough Transform is a general algorithm, though in some cases it is analogous
 	\item \label{item:houghalg:iterpixel} Repeat steps \ref{item:houghalg:selectpixel} - \ref{item:houghalg:iterparam} for all foreground pixels in the image.
 	\item \label{item:houghalg:findfeatures} Find parameters for prominent features by the location of accumulator maximum, or thresholding.
 \end{enumerate}
-In the case of non-binary images, the accumulator simply need not be discrete, such that foreground (or all) pixels just have a partial-voting effect. This algorithm simply extends to higher dimensional images, and higher dimensional parameter spaces. The complexity depends linearly upon the number of foreground pixels. 
+In the case of non-binary images, the accumulator simply need not be discrete, such that foreground (or all) pixels just have a partial-voting effect. This algorithm simply extends to higher dimensional images, and higher dimensional parameter spaces. In general, the complexity depends on the number of foreground pixels and the number of parameters; the complexity \textit{increases} by $O(A^{m-2})$ with each additional parameter, where $A$ is the size of the image space, and $m$ is the number of parameters.
 
 As a concrete example, consider the binary image (with foreground as black)
 \begin{center}
@@ -48,3 +48,9 @@ By performing a Hough Transform with (\ref{eq:hough:line}) defining the paramete
 	\end{tikzpicture}
 \end{center}
 (Realistically these sinusoids are just the patterns of the discrete bins, not actual sinusoidal curves, but I'm lazy and made 5 curves instead of $101^2$ boxes.) The locations where these curves intersect have accumulator values of 2 or 3 (however many curves intersect). From the intersection of the three curves at $(45, 70.7)$ and $(-45, 0)$, we conclude that there are three foreground points that lie on each lines diagonally across the image. Also notice how this special case of the Hough Transform is equivalent to the Radon Transform.
+
+As a brief peek at generalization, the Hough Transform for a circle might be based on the parameterization
+\begin{equation}
+(x-a)^2 + (y-b)^2=r^2 \label{eq:hough:circle}
+\end{equation}
+where the center lies at $(a,b)$ with radius $r$. With three parameters, this algorithm is significantly more complex, though it can be decreased by knowing the radius of circle which is desired \textit{a priori}. Additionally, finding a circle presents interesting considerations, such as the \textit{center} of the circle not being within the original image space while the pixels that contribute to that circle do.
