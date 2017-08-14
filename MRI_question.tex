@@ -1,0 +1,33 @@
+\textbf{Magnetic Resonance Imaging} (\textbf{MRI}) is an imaging modality that expoits the phenomenon of Nuclear Magnetic Resonance to record information about the local chemical environment of specific atoms within a body. Commonly, these atoms are the hydrogen nuclei, but MRI is possible with any nuclei with a non-integer nuclear spin. Generally, the proceedure for MRI is summarized in the following steps, where only step \ref{item:mri:gensteps:gradients} is specific to the Imaging modality over an NMR experiment:
+\begin{enumerate}
+	\item \label{item:mri:gensteps:b0} Nuclei align with an applied, strong magnetic field $\vec{B}_0$.
+	\item \label{item:mri:gensteps:rf} Radio Frequency energy is applied to flip the nuclear magnetization off-axis from $\vec{B}_0$.
+	\item \label{item:mri:gensteps:precess} Interaction between $\vec{B}_0$ and nuclear magnetizations causes magnetizations to \textbf{\textit{precess}}.
+	\item \label{item:mri:gensteps:record} Induced current from precessing magnetization is observed in an RF coil.
+	\item \label{item:mri:gensteps:gradients} Speed of precession is spatially varied by a spatially-varying magnetic field gradient.
+\end{enumerate}
+
+Magnetism is an inherent property of matter which causes materials to interact with external magnetic fields to generate their own magnetic field. This phenomenon is characterized by the relation
+\begin{equation}
+\vec{H} = \chi \vec{B}
+\end{equation}
+where $\vec{H}$ is the generated field, $\vec{B}$ is the applied field, and $\chi$ is the \textit{magnetic susceptibility} of the matter. Matter is classified into three main categories based on $\chi$:
+\begin{description}
+	\item[Paramagnetic] matter has \textit{positive} $\chi$, thus $\vec{H}$ points in the same direction as $\vec{B}$. \textbf{Ex:} Aluminum
+	\item[Diamagnetic] matter has \textit{negative} $\chi$, thus $\vec{H}$ points in the opposite direction as $\vec{B}$. \textbf{Ex:} Water
+	\item[Ferromagnetic] matter has \textit{large} $\chi$. \textbf{Ex:} Iron
+\end{description}
+Magnetism originates from the electrons of an atom, but Nuclear Magnetic Resonance originates from the nucleus and is still subject to electronic magnetism, or \textit{chemical shift} phenomena.
+
+Nuclear Magnetism arises from nuclei of atoms with odd-even pairing of neutrons and protons, resulting in nuclei with non-integer spin. E.g. $^1$H with spin $I=\sfrac{1}{2}$. Nuclear spin in motion gives rise to an angular momentum of the spin:
+\begin{equation}
+J=\hbar I = \frac{h}{2\pi}I
+\end{equation}
+where J is the resulting angular momenta, $h$ is Planck's constant, and $\hbar$ is the reduced Planck constant. 
+The magnetic moment of matter is also determined by
+\begin{equation}
+\mu = \gamma J = \gamma \hbar I
+\end{equation}
+where $\mu$ is the magnetic moment and $\gamma$ is the \textit{gyromagnetic ratio} that is specific to the nucleus in question.
+
+Bulk Magnetization is 
