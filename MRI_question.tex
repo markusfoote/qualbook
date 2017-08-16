@@ -31,7 +31,7 @@ The magnetic moment of matter is also determined by
 \end{equation}
 where $\mu$ is the magnetic moment and $\gamma$ is the \textit{gyromagnetic ratio} that is specific to the nucleus in question.
 
-Bulk magnetization (the collective net magnetization from a region of matter) is dependent upon the relative number of individual moments in the 'up' (parallel to $\vec{B}_0$) and 'down' (anti-parallel to $\vec{B}_0$) states:
+Bulk magnetization (the collective net magnetization from a region of matter) is dependent upon the relative number of individual moments in the `up' (parallel to $\vec{B}_0$) and `down' (anti-parallel to $\vec{B}_0$) states:
 \begin{equation}
 \vec{m} = \mu (\Delta N)
 \end{equation}
@@ -66,7 +66,7 @@ where $\chi_{_0}$ is a matter-specific term that describes the resulting magneti
 	\item[$\mathbf{B_0}$] Make it big, but not too big. Like 1.5 T at least, probably 7 T is awesome.
 	\item[$\mathbf{N}$] Effectively this is the voxel size. Cubic power. $\sfrac{1}{2}$ resolution $\to$ 8x larger voxel $\to$ 64x signal.
 	\item[$\mathbf{T}$] Very limited range if you want the subject to be alive, but colder is better.
-	\item{$\!\!\mathbf{\gamma}$} Pick nuclei with high $\gamma$, and isotope with high abundance. See Table \ref{tab:mri:nuclist}.
+	\item{$\!\!\mathbf{\gamma}\;$} Pick nuclei with high $\gamma$, and isotope with high abundance. See Table \ref{tab:mri:nuclist}.
 \end{description}
 \begin{table}[h]
 	\caption{\label{tab:mri:nuclist} Relevant Properties of Some Common Nuclei}
@@ -83,6 +83,76 @@ where $\chi_{_0}$ is a matter-specific term that describes the resulting magneti
 \end{table}
 
 \section{Spin Motion and the NMR Signal}
+Precession of the nuclear magnetization, or `spin' is described by
+\begin{equation}
+\frac{d\vec{m}}{dt}=\gamma \vec{m} \times \vec{B}.
+\end{equation}
+The resulting motion is analogous to a spinning gyroscope: the rotation does not change, but the \textit{axis of rotation} changes. The precession of earth leads to changes in the classification of the north star, while the typical spinning of earth manifests as day/night.
+
+There are four important cases of spin motion in the context of MRI/NMR:
+\begin{enumerate}
+	\item First is the case when $\vec{m}$ is aligned with $\vec{B}$, for example $\vec{m} = m_0\; \hat{z}$ and $\vec{B}  = B_0\; \hat{z}$. This results in the derivative term being zero from properties of the vector cross product. This case is stable (see Fig. \ref{fig:mri:stable}).
+
+\item \label{item:mri:precession}The second case is substantially more interesting. If we let 
+\begin{equation}
+\vec{m} = m_0\; \hat{x}
+\end{equation} and \begin{equation}
+\vec{B}  = B_0\; \hat{z} ,
+\end{equation} then \begin{equation}
+ \frac{d\vec{m}}{dt} = - m_0B_0\;\hat{y}\; .
+ \end{equation} 
+This results in the infinitesimal motion of the magnetization to move in the $-\hat{y}$ direction. As time progresses, the magnetization precesses \textit{about} $-\hat{z}$ at the rate $\omega = -\gamma B_0$, known as the \textit{Larmor} frequency (see Fig. \ref{fig:mri:precession}).
+\item Similar to case \ref{item:mri:precession}, the precession about $-\hat{z}$ is stable at any angle $\alpha$ (see Fig. \ref{fig:mri:decay}).
+
+\item Finally, the case of `flipping' the magnetization from alignment with $\hat{z}$ to alignment with $\hat{x}$. Starting with \begin{equation}
+\vec{m} = m_0\; \hat{z}
+\end{equation} the application of an infinitely short magnetic field pointing in the $-\hat{y}$ direction 
+\begin{equation}
+\vec{B} = -\delta(t)B_1\hat{y}
+\end{equation}results in changing the direction of $\vec{m}$ towards the $\hat{x}$ axis. Realistically, this applied field cannot be infinitely short, so after every bit of time, the $\vec{B}_1$ field must be updated to still be perpendicular to $\vec{m}$. This results in a field applied according to
+\begin{equation}
+\vec{B}=B_1\big(\cos\left(\omega_0 t\right) - \sin\left(\omega_0 t\right)\big)
+\end{equation}
+giving a clockwise spin of the applied magnetic field (precession about the $-\hat{z}$ axis). This results in $\vec{m}$ precessing about the $\hat{z}$ axis while being progressively `flipped' to the transverse ($\hat{x}$-$\hat{y}$) plane. The overall `flip' procedure is parameterized by $\alpha$, the resulting angle that $\vec{m}$ makes with the $+\hat{z}$ axis (see Fig. \ref{fig:mri:flip}).
+
+\end{enumerate}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.22\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{mri-a}
+		\caption{Stable Magnetization}
+		\label{fig:mri:stable}
+	\end{subfigure}\hfill
+	\begin{subfigure}[b]{0.22\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{mri-b}
+		\caption{Spin Motion}
+		\label{fig:mri:precession}
+	\end{subfigure}\hfill
+	\begin{subfigure}[b]{0.22\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{mri-c}
+		\caption{Precession at an angle}
+		\label{fig:mri:decay}
+	\end{subfigure}\hfill
+	\begin{subfigure}[b]{0.22\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{mri-d}
+		\caption{Excitation}
+		\label{fig:mri:flip}
+	\end{subfigure}\hfill
+	\caption{Canonical Cases of Spin Motion}\label{fig:mri:cases}
+\end{figure}
+
+The fundamentals presented thus far are sufficient to describe the most basic NMR experiment:\\
+{\centering
+	\includegraphics[width=0.8\linewidth]{mri-nmr}
+}
 
 
 \section{Spatial Encoding}
+
+
+\section{MRI Contrast Mechanisms}
