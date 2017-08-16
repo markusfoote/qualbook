@@ -1,3 +1,4 @@
+\section{Overview} %TODO Maybe remove this
 \textbf{Magnetic Resonance Imaging} (\textbf{MRI}) is an imaging modality that expoits the phenomenon of Nuclear Magnetic Resonance to record information about the local chemical environment of specific atoms within a body. Commonly, these atoms are the hydrogen nuclei, but MRI is possible with any nuclei with a non-integer nuclear spin. Generally, the proceedure for MRI is summarized in the following steps, where only step \ref{item:mri:gensteps:gradients} is specific to the Imaging modality over an NMR experiment:
 \begin{enumerate}
 	\item \label{item:mri:gensteps:b0} Nuclei align with an applied, strong magnetic field $\vec{B}_0$.
@@ -6,10 +7,10 @@
 	\item \label{item:mri:gensteps:record} Induced current from precessing magnetization is observed in an RF coil.
 	\item \label{item:mri:gensteps:gradients} Speed of precession is spatially varied by a spatially-varying magnetic field gradient.
 \end{enumerate}
-
+\section{Magnetism and Nuclear Magnetic Resonance}
 Magnetism is an inherent property of matter which causes materials to interact with external magnetic fields to generate their own magnetic field. This phenomenon is characterized by the relation
 \begin{equation}
-\vec{H} = \chi \vec{B}
+\vec{H} = \chi \vec{B} \label{eq:mri:magneticsusceptibility}
 \end{equation}
 where $\vec{H}$ is the generated field, $\vec{B}$ is the applied field, and $\chi$ is the \textit{magnetic susceptibility} of the matter. Matter is classified into three main categories based on $\chi$:
 \begin{description}
@@ -30,4 +31,58 @@ The magnetic moment of matter is also determined by
 \end{equation}
 where $\mu$ is the magnetic moment and $\gamma$ is the \textit{gyromagnetic ratio} that is specific to the nucleus in question.
 
-Bulk Magnetization is 
+Bulk magnetization (the collective net magnetization from a region of matter) is dependent upon the relative number of individual moments in the 'up' (parallel to $\vec{B}_0$) and 'down' (anti-parallel to $\vec{B}_0$) states:
+\begin{equation}
+\vec{m} = \mu (\Delta N)
+\end{equation}
+where $N$ is the number of magnetic moments in the up and down states such that $\Delta N$ is the net difference of moments in the anti-parallel direction.
+$N$ follows a Boltzmann distribution based on the energy state, $E$, of the nuclei:
+\begin{equation}
+N\propto e^{-\frac{E}{kT}}
+\end{equation}
+where $k$ is the Boltzman constant and $T$ is the absolute temperature. The energy state of a magnetic moment is
+\begin{equation}
+E(\mu) = -\mu B_0 = -\gamma \hbar m B_0
+\end{equation}
+where $m = \left\{I \ldots\sfrac{3}{2}, \sfrac{1}{2}, -\sfrac{1}{2}, -\sfrac{3}{2},\ldots -I\right\}$ are the permissible states for the spin $I$. Again assuming $^1$H nuclei, the two energy states are
+\begin{align}
+E\left(\text{up}\right) &= - \gamma \hbar \left(\sfrac{1}{2}\right) B_0 \\
+E\left(\text{down}\right) &= + \gamma \hbar \left(\sfrac{1}{2}\right) B_0 .
+\end{align}
+The ratio of spin alignment can then be calculated:
+\begin{equation}
+\frac{N\left(\text{up}\right)}{N\left(\text{down}\right)} = e^{+ \frac{\Delta E}{kT}} \label{eq:mri:ratio}
+\end{equation}
+where $\Delta E = E\left(\text{down}\right) - E\left(\text{up}\right)$. If we then suppose that there exist a total of $N$ nuclei such that $N\left(\text{up}\right) + N\left(\text{down}\right) = N$, then from this and (\ref{eq:mri:ratio}) we can solve for $\Delta N$ and thus $M$:
+\begin{equation}
+M=\mu \Delta N = \frac{N\gamma^2 \hbar^2 B_0}{4kT}
+\end{equation}
+This equation can be massaged to match the form of (\ref{eq:mri:magneticsusceptibility}):
+\begin{align}
+M = \chi_{_0} B_0 && \chi_{_0} = \frac{N\gamma^2 \hbar^2 }{4kT}
+\end{align}
+where $\chi_{_0}$ is a matter-specific term that describes the resulting magnetic field from an applied field $B_0$. This $\chi_{_0}$ is very small, and results in a very low effective signal from a body of matter. However, there are engineering decisions in each of these terms that helps raise the signal:
+\begin{description}
+	\item[$\mathbf{B_0}$] Make it big, but not too big. Like 1.5 T at least, probably 7 T is awesome.
+	\item[$\mathbf{N}$] Effectively this is the voxel size. Cubic power. $\sfrac{1}{2}$ resolution $\to$ 8x larger voxel $\to$ 64x signal.
+	\item[$\mathbf{T}$] Very limited range if you want the subject to be alive, but colder is better.
+	\item{$\!\!\mathbf{\gamma}$} Pick nuclei with high $\gamma$, and isotope with high abundance. See Table \ref{tab:mri:nuclist}.
+\end{description}
+\begin{table}[h]
+	\caption{\label{tab:mri:nuclist} Relevant Properties of Some Common Nuclei}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline Nuclei & $I$ & $\frac{\gamma}{2\pi}$ (MHz/T) & nat. abundance (\%) \\ 
+		\hline $^1$H & \sfrac{1}{2} & \textbf{42.58} & 99.98 \\ 
+		\hline $^{13}$C & \sfrac{1}{2} & 10.71 & 1.11 \\ 
+		\hline $^{19}$F & \sfrac{1}{2} & 40.05 & 100 \\ 
+		\hline $^{31}$P & \sfrac{1}{2} & 17.23 & 100 \\ 
+		\hline $^{23}$Na & \sfrac{3}{2} & 11.26 & 100 \\ 
+		\hline 
+	\end{tabular} 
+\end{table}
+
+\section{Spin Motion and the NMR Signal}
+
+
+\section{Spatial Encoding}
