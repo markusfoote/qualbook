@@ -5,7 +5,54 @@
 Radon Transform Equation
 
 \begin{equation}
-g(\rho,\theta) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y) \; \delta \big(xcos(\theta) + ysin(\theta) - \rho \big) \; dx \; dy
+g(\rho_i,\theta_k) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y) \; \delta \big(xcos(\theta) + ysin(\theta) - \rho \big) \; dx \; dy
+\label{eq:Radon}
 \end{equation}
+
+\noindent
+where $g(\rho_i,\theta_k)$ is the radon transform for given sets $\{\rho_i\}$ and $\{\theta_k\}$, $I(x,y)$ is the image that is desired image, and $\delta$ is the dirac delta function. Back projection then uses these individual radon transforms to create a back-projected image.  For a given $\theta$ the back-projected image is the following:
+
+\begin{equation}
+f_{\theta}(x,y) = g(xcos(\theta) + ysin(\theta), \theta)
+\end{equation}
+
+\noindent
+Summation of these individual back-projected images generates an image of the original object:
+
+\begin{equation}
+I(x,y) = \sum_{\theta=0}^{\pi} \: f_{\theta}(x,y) = \sum_{\theta=0}^{\pi} \: g(xcos(\theta) + ysin(\theta), \theta)
+\end{equation}
+
+Another method for reconstructing an image is to ust the central slice theorem which states that the 1-D Fourier transform of a radon transform is a single slice of the 2-D Fourier transform of the image that passes through the origin at angle $\theta$. To prove this, let us consider a single radon transform at angle $\theta$ and take the 1-D Fourier transform of it:
+
+\begin{equation}
+G(w,\theta) = \int_{-\infty}^{\infty} g(\rho,\theta) \: e^{i2\pi  w \rho} \: d\rho
+\label{eq:1Dft}
+\end{equation}
+
+\noindent
+substituting \ref{eq:Radon} into \ref{eq:1Dft} yeilds the following:
+
+\begin{equation}
+G(w,\theta) = \int_{-\infty}^{\infty} \: \biggl[  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y) \; \delta \big(xcos(\theta) + ysin(\theta) - \rho \big) \; dx \; dy  \biggr] \: e^{i2\pi  w \rho} \: d\rho
+\end{equation}
+
+\noindent
+rearranging this gives:
+
+\begin{equation}
+G(w,\theta) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y) \: \biggl[ \underbrace{ \int_{-\infty}^{\infty} \delta \big(xcos(\theta) + ysin(\theta) - \rho \big) e^{i2\pi w \rho} \: d\rho} \biggr] \: dx \: dy
+\end{equation}
+
+\noindent
+using the properties of the dirac delta, the equation can be simplified:
+
+\begin{equation}
+G(w,\theta) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y)   e^{i2\pi w \big(xcos(\theta) + ysin(\theta) \big)} \: dx \: dy 
+\end{equation}
+
+\noindent
+which is the 2-D Fourier transform along the line $wcos(\theta) + wsin(\theta)$
+
 
 \section{Reconstruction from Projection Data}
