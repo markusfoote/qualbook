@@ -1,8 +1,8 @@
 \section{X-ray Summary}
 
-\section{Rudimentary Projection Experiment Setup}
+\section{Projections and Reconstructions}
 
-Radon Transform Equation
+The basic equation for taking a projection of an object at a given angle is the following:
 
 \begin{equation}
 g(\rho_i,\theta_k) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y) \; \delta \big(xcos(\theta) + ysin(\theta) - \rho \big) \; dx \; dy
@@ -10,20 +10,20 @@ g(\rho_i,\theta_k) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y) \; \
 \end{equation}
 
 \noindent
-where $g(\rho_i,\theta_k)$ is the radon transform for given sets $\{\rho_i\}$ and $\{\theta_k\}$, $I(x,y)$ is the image that is desired image, and $\delta$ is the dirac delta function. Back projection then uses these individual radon transforms to create a back-projected image.  For a given $\theta$ the back-projected image is the following:
+where $g(\rho_i,\theta_k)$ is the radon transform for given sets $\{\rho_i\}$ and $\{\theta_k\}$, $I(x,y)$ is the image that is desired image, or the object, and $\delta$ is the dirac delta function. Back projection then uses these individual projections to create a final image.  For a given $\theta$ the back-projected image is the following:
 
 \begin{equation}
 f_{\theta}(x,y) = g(xcos(\theta) + ysin(\theta), \theta)
 \end{equation}
 
 \noindent
-Summation of these individual back-projected images generates an image of the original object:
+Summation of these individual back-projected images generates a final image of the original object:
 
 \begin{equation}
 I(x,y) = \sum_{\theta=0}^{\pi} \: f_{\theta}(x,y) = \sum_{\theta=0}^{\pi} \: g(xcos(\theta) + ysin(\theta), \theta)
 \end{equation}
 
-Another method for reconstructing an image is to ust the central slice theorem which states that the 1-D Fourier transform of a radon transform is a single slice of the 2-D Fourier transform of the image that passes through the origin at angle $\theta$. To prove this, let us consider a single radon transform at angle $\theta$ and take the 1-D Fourier transform of it:
+However this method causes blurring due to multiple projections adding up in the middle (over-sampling), which means that the image obtained is not correct. What is needed is filtered back projection.  A key theorem for this is the central slice theorem which states that the 1-D Fourier transform of a radon transform is a single slice of the 2-D Fourier transform of the image that passes through the origin at angle $\theta$. To prove this, let us consider a single radon transform at angle $\theta$ and take the 1-D Fourier transform of it:
 
 \begin{equation}
 G(w,\theta) = \int_{-\infty}^{\infty} g(\rho,\theta) \: e^{i2\pi  w \rho} \: d\rho
@@ -48,11 +48,38 @@ G(w,\theta) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y) \: \biggl[ 
 using the properties of the dirac delta, the equation can be simplified:
 
 \begin{equation}
-G(w,\theta) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y)   e^{i2\pi w \big(xcos(\theta) + ysin(\theta) \big)} \: dx \: dy 
+G(w,\theta) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} I(x,y)   e^{i2\pi w \big(xcos(\theta) + ysin(\theta) \big)} \: dx \: dy \: = \: F(wcos(\theta),wsin(\theta))
+\label{eq:sliceThrm}
 \end{equation}
 
 \noindent
-which is the 2-D Fourier transform along the line $wcos(\theta) + wsin(\theta)$
+ Note that this is the a slice of the 2-D Fourier transform along a line $w$ at angle $\theta$. Let us now look at reconstructing the desired image from the Fourier space:
 
+\begin{equation}
+I(x,y) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} F(u,v)   e^{i2\pi \big(ux + vy \big)} \: du \: dv 
+\end{equation}
 
-\section{Reconstruction from Projection Data}
+\noindent 
+Now we can convert this to polar coordinates:
+
+\begin{equation}
+I(x,y) = \int_{0}^{2\pi} \int_{-\infty}^{\infty} w \: F(wcos(\theta),wsin(\theta))   e^{i2\pi w\big(xcos(\theta) + ysin(\theta) \big)} \:  dw \: d\theta
+\end{equation}
+
+\noindent
+Using the Fourier slice theorm from \ref{eq:sliceThrm} we can write the following:
+
+\begin{equation}
+I(x,y) = \int_{0}^{2\pi} \int_{-\infty}^{\infty} w\:  G(w,\theta)  e^{i2\pi w\big(xcos(\theta) + ysin(\theta) \big)} \:  dw \: d\theta
+\end{equation}
+
+\noindent
+Here we can note that $G(w,\theta + \pi) = G(-w,\theta)$ so we can write the following:
+
+\begin{equation}
+I(x,y) = \int_{0}^{\pi} \int_{-\infty}^{\infty} |w|\: G(w,\theta)  e^{i2\pi w\big(xcos(\theta) + ysin(\theta) \big)} \:  dw \: d\theta
+\end{equation}
+
+What this shows is that the desired image needs to have the 1-D Fourier transforms of the projections each filtered by $|w|$ in order properly reconstruct the image. This is called filtered back projection and now that the individual projections have been scaled, the reconstructed image is now correct. 
+
+\section{Sampling Criteria}
