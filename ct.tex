@@ -23,7 +23,7 @@ Summation of these individual back-projected images generates a final image of t
 I(x,y) = \sum_{\theta=0}^{\pi} \: f_{\theta}(x,y) = \sum_{\theta=0}^{\pi} \: g(xcos(\theta) + ysin(\theta), \theta)
 \end{equation}
 
-However this method causes blurring due to multiple projections adding up in the middle (over-sampling), which means that the image obtained is not correct. What is needed is filtered back projection.  A key theorem for this is the central slice theorem which states that the 1-D Fourier transform of a radon transform is a single slice of the 2-D Fourier transform of the image that passes through the origin at angle $\theta$. To prove this, let us consider a single radon transform at angle $\theta$ and take the 1-D Fourier transform of it:
+However this causes blurring due to multiple projections adding up in the middle (over-sampling), which means that the image obtained is not correct. What is needed is filtered back projection.  A key theorem for this is the central slice theorem which states that the 1-D Fourier transform of a radon transform is a single slice of the 2-D Fourier transform of the image that passes through the origin at angle $\theta$. To prove this, let us consider a single radon transform at angle $\theta$ and take the 1-D Fourier transform of it:
 
 \begin{equation}
 G(w,\theta) = \int_{-\infty}^{\infty} g(\rho,\theta) \: e^{i2\pi  w \rho} \: d\rho
