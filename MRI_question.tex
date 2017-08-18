@@ -142,7 +142,7 @@ giving a clockwise spin of the applied magnetic field (precession about the $-\h
 		\includegraphics[width=\linewidth]{mri-d}
 		\caption{Excitation}
 		\label{fig:mri:flip}
-	\end{subfigure}\hfill
+	\end{subfigure}
 	\caption{Canonical Cases of Spin Motion}\label{fig:mri:cases}
 \end{figure}
 
@@ -151,8 +151,64 @@ The fundamentals presented thus far are sufficient to describe the most basic NM
 	\includegraphics[width=0.8\linewidth]{mri-nmr}
 }
 
-
 \section{Spatial Encoding}
+Magnetic Resonance \textit{Imaging} is made possible by encoding spatial information in the NMR signal. This is accomplished by making $B$ a linear function of space using \textit{gradient fields}. These magnetic gradient fields are always parallel to the main $B_0$ field. By changing the magnitude of the magnetic field, the spins precess faster or slower to form a frequency histogram, which is a projection of the object. Example gradient fields are shown in Fig. \ref{fig:mri:gradients}.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{mri-gradx}
+		\caption{$G_x$}
+		\label{fig:mri:gradx}
+	\end{subfigure}\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{mri-grady}
+		\caption{$G_y$}
+		\label{fig:mri:grady}
+	\end{subfigure}\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{mri-gradz}
+		\caption{$G_z$}
+		\label{fig:mri:gradz}
+	\end{subfigure}
+	\caption{Gradient Fields}\label{fig:mri:gradients}
+\end{figure} 
+
+The Larmor frequency is thus dependent on the location of the spin:
+\begin{align}
+\vec{G} &= \left[\begin{matrix}G_x\\G_y\\G_z\end{matrix}\right]\\
+\vec{r} &= \left[\begin{matrix}x\\y\\z\end{matrix}\right]\\
+B &= B_0 + \vec{G}\cdot \vec{r}\\
+\omega(\vec{r}) &= -\gamma B = -\gamma\left(B_0 + \vec{G}\cdot \vec{r}\right) \label{eq:mri:larmorgrad}
+\end{align}
+Using this relation and assuming that $m(x,y,z) = m(\vec{r})$ is the proton density image, each magnetization in space will precess at the frequency corresponding to its location by \ref{eq:mri:larmorgrad}. The signal radiated by a single point is 
+\begin{equation}
+m(\vec{r})e^{i\omega(\vec{r})t}.
+\end{equation}
+The total signal recorded by a coil surrounding the body is found by integrating over the entire volume:
+\begin{equation}
+s(t) = \iiint_{\Omega}m(\vec{r})e^{-i\gamma \vec{G}\cdot\vec{r}t}d\vec{r}
+\end{equation}
+A useful substitution is made by introducing the variable $k$:
+\begin{equation}
+\vec{k} = \frac{\gamma}{2\pi} \vec{G}t
+\end{equation}
+\begin{equation}
+s(\vec{k}) = \iiint_{\Omega}m(\vec{r})e^{-i2\pi \vec{k}\cdot\vec{r}}d\vec{r}
+\end{equation}
+
+Close inspection of this equation reveals that it is simply the forward Fourier Transform of the function of spatial magnetization $m(\vec{r})$. The original magnetization image can be easily obtained by the \textit{inverse} Fourier Transform of the acquired signal.
+\section{Slice Selection}
+Spatial encoding of the Larmor frequency via gradient fields also enables selective excitation. The target nuclei within the 2D plane (or slab) we aim to excite are provisioned a common resonant frequency by applying a gradient in the direction orthogonal to that plane. The target slice can then be excited by delivering radiofrequency energy at the appropriate frequency via a modulated radiofrequency pulse, especially a sinc-modulated sinusoid. 
 
 
 \section{MRI Contrast Mechanisms}
+\subsection{Spin Lattice Relaxation - T1}
+\subsection{Spin-Spin Relaxation - T2}
+\subsection{Dephasing - T2*}
+\subsection{Bloch Equation}
+\subsection{Diffusion}
+\subsection{FatSat}
