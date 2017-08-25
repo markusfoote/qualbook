@@ -188,6 +188,15 @@ Using this relation and assuming that $m(x,y,z) = m(\vec{r})$ is the proton dens
 \begin{equation}
 m(\vec{r})e^{i\omega(\vec{r})t}.
 \end{equation}
+
+Moving into the rotating reference frame, the effect of the static $B_0$ field is eliminated, and we can consider only the change in frequency from the static $B_0$ that is imbued by the gradient fields:
+\begin{equation}
+\Delta\omega(\vec{r}) = -\gamma\vec{G}\cdot\vec{r}.
+\end{equation}
+The signal observed in this rotating frame from a single point is
+\begin{equation}
+s(t) = m(\vec{r})e^{i\Delta\omega(\vec{r})t}.
+\end{equation}
 The total signal recorded by a coil surrounding the body is found by integrating over the entire volume:
 \begin{equation}
 s(t) = \iiint_{\Omega}m(\vec{r})e^{-i\gamma \vec{G}\cdot\vec{r}t}d\vec{r}
@@ -203,6 +212,13 @@ s(\vec{k}) = \iiint_{\Omega}m(\vec{r})e^{-i2\pi \vec{k}\cdot\vec{r}}d\vec{r}
 Close inspection of this equation reveals that it is simply the forward Fourier Transform of the function of spatial magnetization $m(\vec{r})$. The original magnetization image can be easily obtained by the \textit{inverse} Fourier Transform of the acquired signal.
 \section{Slice Selection}
 Spatial encoding of the Larmor frequency via gradient fields also enables selective excitation. The target nuclei within the 2D plane (or slab) we aim to excite are provisioned a common resonant frequency by applying a gradient in the direction orthogonal to that plane. The target slice can then be excited by delivering radiofrequency energy at the appropriate frequency via a modulated radiofrequency pulse, especially a sinc-modulated sinusoid. 
+\begin{figure}[ht]
+	\centering
+	
+		\includegraphics[width=0.7\linewidth]{mri-sliceselectgradientstrength}
+		
+	\caption{Diagram indicating effect of increased gradient field strength on slice selection.}\label{fig:mri:sliceselectgradstrength}
+\end{figure} 
 
 
 \section{MRI Contrast Mechanisms}
@@ -286,3 +302,35 @@ with this we can then take the derivative with respect to $\alpha$ and set that 
 \cos(\alpha) = e^{-\sfrac{T_R}{T_1}}
 \end{equation}
 
+\section{MRI Field of View}
+
+The field of view in an MRI acquisition follows a general inverse relationship with the sampling frequency of the acquisition:
+\begin{equation}
+\Delta k_{x,y,z} = \frac{1}{FOV_{x,y,z}}
+\end{equation}
+The sampling of k-space relates to FOV and the Gradient strength by
+\begin{equation}
+\Delta k_{ro,freq,x} = \frac{\gamma}{2\pi}  \cdot\frac{1}{SW}\cdot G_{ro,freq,x}
+\end{equation}
+where $SW$ is the `sweep width'/sampling frequency of the digitizer in the MRI system. Similarly for the phase-encoding direction:
+\begin{equation}
+\Delta k_{phase,y} = \frac{\gamma}{2\pi}  \cdot\tau\cdot\Delta G_{phase,y}
+\end{equation}
+where $\tau$ is the time that the gradient is turned on before read-out, and $\Delta G_{phase,y}$ is the step-distance in the `ladder' for each excitation.
+See the shamelessly stolen images that demonstrate this inverse relationship in Fig.\ref{fig:mri:fov} .
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{mri-fovpx}
+		\caption{Inverse relationship between spacing of data samples ($\Delta k$) and image field-of-view ($FOV$)}
+		\label{fig:mri:fovpx}
+	\end{subfigure}\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{mri-fov}
+		\caption{Inverse relationship between pixel width ($\Delta \omega$) and range of sampled k-space frequencies ($k_{FOV}$)}
+		\label{fig:mri:fovsame}
+	\end{subfigure}
+	\caption{MRI FOV Relationships}\label{fig:mri:fov}
+\end{figure} 
