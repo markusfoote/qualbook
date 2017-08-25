@@ -1,4 +1,4 @@
-\section{Overview} %TODO Maybe remove this
+\section{Overview} 
 \textbf{Magnetic Resonance Imaging} (\textbf{MRI}) is an imaging modality that expoits the phenomenon of Nuclear Magnetic Resonance to record information about the local chemical environment of specific atoms within a body. Commonly, these atoms are the hydrogen nuclei, but MRI is possible with any nuclei with a non-integer nuclear spin. Generally, the proceedure for MRI is summarized in the following steps, where only step \ref{item:mri:gensteps:gradients} is specific to the Imaging modality over an NMR experiment:
 \begin{enumerate}
 	\item \label{item:mri:gensteps:b0} Nuclei align with an applied, strong magnetic field $\vec{B}_0$.
@@ -40,7 +40,7 @@ $N$ follows a Boltzmann distribution based on the energy state, $E$, of the nucl
 \begin{equation}
 N\propto e^{-\frac{E}{kT}}
 \end{equation}
-where $k$ is the Boltzman constant and $T$ is the absolute temperature. The energy state of a magnetic moment is
+where $k$ is the Boltzmann constant and $T$ is the absolute temperature. The energy state of a magnetic moment is
 \begin{equation}
 E(\mu) = -\mu B_0 = -\gamma \hbar m B_0
 \end{equation}
@@ -248,8 +248,11 @@ These equations are written together as a single vector equation:
 \frac{d\vec{m}}{dt} = \gamma \vec{m} \times \vec{B} -\left[\begin{matrix}\sfrac{1}{T_2}&0&0\\0&\sfrac{1}{T_2}&0\\0&0&\sfrac{1}{T_1}\end{matrix}\right] \left(\vec{m}-\vec{m}_0\right)
 \end{equation}
 \subsection{Diffusion}
+Zeroth moment of gradients (area under curves) encodes location. Take it a step further and calculate (well, design pulse sequence that has) large First Moment of gradient, which encodes velocity. 
 \subsection{FatSat}
+Use the fat-specific chemical shift of protons on fat to excite them (90$^\circ$ flip), then spoil gradient to dephase.
 \section{Steady-State Magnetization}
+<<<<<<< HEAD
 
 The magnetization after many $\alpha$ pluses is given by the following:
 
@@ -277,3 +280,14 @@ with this we can then take the derivative with respect to $\alpha$ and set that 
 \begin{equation}
 \cos(\alpha) = e^{-\sfrac{T_R}{T_1}}
 \end{equation}
+=======
+\begin{equation}
+m_{z'}^{(n)}\left(0_-\right) = m_z^0\left(1-e^{-TR/T_1}\right) + m_z^{(n-1)}\left(0_-\right)\cos\left(\alpha\right)e^{-TR/T_1}
+\end{equation}
+\begin{equation}
+m_{ss}= \frac{m_0\left(1-e^{-\sfrac{TR}{T_1}}\right)}{1-\cos\left(\alpha\right)e^{-\sfrac{TR}{T_1}}}
+\end{equation}
+\begin{equation}
+\cos\left(\alpha\right)=e^{-\sfrac{TR}{T_1}}
+\end{equation}
+>>>>>>> 85058e465bfc011183d47523e981940db3b9f0a4
