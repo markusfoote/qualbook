@@ -357,8 +357,9 @@ One thing that is not labeled is the negative lobe in the slice-select gradient 
 \end{figure}
 
 Here it is important to note that the signal is attenuated due to $T_2^*$ decay because the transverse magnetization is not being re-phased. To clearly demonstrate this, Figure \ref{fig:mri:sig} has been added to juxtapose the signal for a spin echo sequence, Figure \ref{fig:mri:spinsig}, and the gradient echo signal, Figure \ref{fig:mri:gradsig}. 
+Another important feature of Figure \ref{fig:mri:spinsig} is that it shows the contrast difference if the $T_E$ is longer. Figure \ref{fig:mri:fastspin} was added to illustrate how spin echo is done qucikly and to just show the overall sequential pulses of spin echo.
 
-\begin{figure}[ht]
+\begin{figure}[h!]
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
@@ -374,3 +375,10 @@ Here it is important to note that the signal is attenuated due to $T_2^*$ decay 
 	\end{subfigure}
 	\caption{MRI Signal Relationships}\label{fig:mri:sig}
 \end{figure} 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{fastspin}	
+	\caption{Gradient Echo Pulse Sequence}
+	\label{fig:mri:fastspin}
+\end{figure}
