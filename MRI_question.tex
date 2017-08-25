@@ -248,5 +248,16 @@ These equations are written together as a single vector equation:
 \frac{d\vec{m}}{dt} = \gamma \vec{m} \times \vec{B} -\left[\begin{matrix}\sfrac{1}{T_2}&0&0\\0&\sfrac{1}{T_2}&0\\0&0&\sfrac{1}{T_1}\end{matrix}\right] \left(\vec{m}-\vec{m}_0\right)
 \end{equation}
 \subsection{Diffusion}
+Zeroth moment of gradients (area under curves) encodes location. Take it a step further and calculate (well, design pulse sequence that has) large First Moment of gradient, which encodes velocity. 
 \subsection{FatSat}
+Use the fat-specific chemical shift of protons on fat to excite them (90$^\circ$ flip), then spoil gradient to dephase.
 \section{Steady-State Magnetization}
+\begin{equation}
+m_{z'}^{(n)}\left(0_-\right) = m_z^0\left(1-e^{-TR/T_1}\right) + m_z^{(n-1)}\left(0_-\right)\cos\left(\alpha\right)e^{-TR/T_1}
+\end{equation}
+\begin{equation}
+m_{ss}= \frac{m_0\left(1-e^{-\sfrac{TR}{T_1}}\right)}{1-\cos\left(\alpha\right)e^{-\sfrac{TR}{T_1}}}
+\end{equation}
+\begin{equation}
+\cos\left(\alpha\right)=e^{-\sfrac{TR}{T_1}}
+\end{equation}
