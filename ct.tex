@@ -96,4 +96,8 @@ Now we need to make sure that we get enough different angle projections to get o
 \end{equation}
 where $N$ is the number of detectors, $M$ is the number of radial samples, and $k_{max}$ is the maximum frequency. 
 
-As an example, assume we have the objective to obtain an image with reconstructed resolution of 1mm pixels, with a scanner that has a bank of 512 detectors spaced at 4mm.
+As an example, assume we have the objective to obtain with a scanner that has a bank of 512 detectors:
+\begin{equation}
+M = \frac{\pi\, N}{2} = \frac{\pi\, 512}{2} = \sim 804
+\end{equation}
+thus we need approximately 804 (evenly angularly spaced) projections.
