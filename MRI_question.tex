@@ -334,3 +334,28 @@ See the shamelessly stolen images that demonstrate this inverse relationship in 
 	\end{subfigure}
 	\caption{MRI FOV Relationships}\label{fig:mri:fov}
 \end{figure} 
+
+\section{Basic Pulse Sequences}
+
+The most basic form of imaging is spin echo imaging where the transverse magnetization is re-phased with a 180$^\circ$ flip and then read out.  A basic pulse sequence for spin echo can be seen in figure \ref{fig:mri:spinecho}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{spinechodiag}	
+	\end{center}
+	\label{fig:mri:spinecho}
+	\caption{Spin Echo Pulse Sequence}
+\end{figure}
+
+One thing that is not labeled is the negative lobe in the slice-select gradient line between the 90$^\circ$ and 180$^\circ$ flip. This re-phases the slice that was excited because the slice select gradient caused there to be a frequency shift across the slice. It is important to note here that the signal has been attenuated due to $T_2$ decay because we use a 180$^\circ$ pulse to re-phase the transverse magnetization.  Alternatively, there is gradient echo imaging for which a standard pulse sequence can be seen in figure \ref{fig:mri:gradecho}.
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{gradientechodiag}	
+	\end{center}
+	\label{fig:mri:gradecho}
+	\caption{Gradient Echo Pulse Sequence}
+\end{figure}
+
+Here it is important to note that the signal is attenuated due to $T_2^*$ decay because the transverse magnetization is not being re-phased.
