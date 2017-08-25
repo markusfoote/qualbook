@@ -117,7 +117,7 @@ giving a clockwise spin of the applied magnetic field (precession about the $-\h
 
 \end{enumerate}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
 	\begin{subfigure}[b]{0.22\textwidth}
 		\centering
@@ -154,7 +154,7 @@ The fundamentals presented thus far are sufficient to describe the most basic NM
 \section{Spatial Encoding}
 Magnetic Resonance \textit{Imaging} is made possible by encoding spatial information in the NMR signal. This is accomplished by making $B$ a linear function of space using \textit{gradient fields}. These magnetic gradient fields are always parallel to the main $B_0$ field. By changing the magnitude of the magnetic field, the spins precess faster or slower to form a frequency histogram, which is a projection of the object. Example gradient fields are shown in Fig. \ref{fig:mri:gradients}.
 
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
@@ -206,6 +206,20 @@ Spatial encoding of the Larmor frequency via gradient fields also enables select
 
 
 \section{MRI Contrast Mechanisms}
+
+The general signal equation behind MRI signal assuming a 90$^\circ$ pulse is the following:
+
+\begin{equation}
+S = M_z^0(1-e^{-\frac{T_R}{T_1}})e^{-\frac{T_E}{T_2}}
+\end{equation}
+and depending on the $T_E$ and $T_R$ times, the contrast of the image can be changed. The following is a table of the generic times for different contrasts:
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{mricontrast}	
+	\end{center}
+\end{figure}
+
 \subsection{Spin Lattice Relaxation - T1}
 \begin{equation}
 \frac{dm_z}{dt}= \frac{m_0-m_z}{T_1}
