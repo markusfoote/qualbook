@@ -250,3 +250,30 @@ These equations are written together as a single vector equation:
 \subsection{Diffusion}
 \subsection{FatSat}
 \section{Steady-State Magnetization}
+
+The magnetization after many $\alpha$ pluses is given by the following:
+
+\begin{equation}
+M_z(t_{n+1}) = M_z(T_n) \: \cos(\alpha)\: e^{-\sfrac{T_R}{T_1}} \; \; + \; \; M_0 (1-e^{-\sfrac{T_R}{T_1}})
+\label{eq:N-pulse}
+\end{equation}
+
+\noindent
+where $M_z(T_n)$ represents the magnetization after the $n$ pulse. If we want to reach steady state, that is when $M_z(T_{n+1})=M_z(T_n)=M_{ss}$. If we plug this idea into \ref{eq:N-pulse}:
+
+\begin{equation}
+M_{ss} = \frac{M_0 (1-e^{-\sfrac{T_R}{T_1}})}{1-\cos(\alpha)e^{-\sfrac{T_R}{T_1}}}
+\end{equation}
+
+\noindent
+We can then look at the transverse magnetization resulting from this flip:
+\begin{equation}
+M_{\perp}(TE) = M_{ss} \; \sin(\alpha)\;e^{-\sfrac{T_E}{T_2^*}}= \frac{M_0 (1-e^{-\sfrac{T_R}{T_1}})}{1-\cos(\alpha)e^{-\sfrac{T_R}{T_1}}} \; \sin(\alpha)\; e^{-\sfrac{T_E}{T_2^*}}
+\end{equation}
+
+\noindent
+with this we can then take the derivative with respect to $\alpha$ and set that equal to zero to find the Earsnt angle, or the angle that will maximize signal for a given $T_R$ and $T_1$:
+
+\begin{equation}
+\cos(\alpha) = e^{-\sfrac{T_R}{T_1}}
+\end{equation}
