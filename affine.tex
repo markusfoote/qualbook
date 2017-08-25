@@ -79,7 +79,7 @@ Assuming the points are centered the problem
 \end{equation}
 simplifies to
 \begin{equation}
-\underset{\mathbf{A}}{\min}\sum_i\left\|\mathbf{A}\tilde{x}_i - \tilde{y}_i\right\|^2
+E = \underset{\mathbf{A}}{\min}\sum_i\left\|\mathbf{A}\tilde{x}_i - \tilde{y}_i\right\|^2 
 \end{equation}
 Similar to the procedure performed to find and remove $T$, we now find the variation of $\mathbf{A}$ and set it equal to zero:
 \begin{equation}
@@ -87,7 +87,7 @@ Similar to the procedure performed to find and remove $T$, we now find the varia
 \end{equation}
 Then solving for $\mathbf{A}$:
 \begin{equation}
-\mathbf{A}=\left(\sum_i\tilde{x}_i\tilde{x}_i^T\right)^{-1}\left(\sum_i\tilde{y}_i\tilde{x}_i^T\right)
+\mathbf{A}=\left(\sum_i\tilde{y}_i\tilde{x}_i^T\right)\left(\sum_i\tilde{x}_i\tilde{x}_i^T\right)^{-1}
 \end{equation}
 
 A special note here about the matrix $\sum_i\tilde{x}_i\tilde{x}_i^T$: A minimum of 3 non-co-linear points in 2D (or 4 non-coplanar points in 3D) are required for this matrix to be invertible. 
