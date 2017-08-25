@@ -1,0 +1,56 @@
+The name thin plate spline refers to a physical analogy involving the bending of a thin sheet of metal. Just as the metal has rigidity, the TPS fit resists bending also, implying a penalty involving the smoothness of the fitted surface. In the physical setting, the deflection is in the $z$ direction, orthogonal to the plane. In order to apply this idea to the problem of coordinate transformation, we interpret the lifting of the sheet of metal as a displacement of the $x$ or $y$ coordinates within the plane. Thin plate splines work when there are a finite number of point correspondences with irregular spacing. For simplicity sake, we will only consider the 2-D case here. The equation for the least bent surface that exactly matches the given point correspondences is: 
+
+\begin{equation}
+f(x,y) = a_1 + a_2x + a_3y + \sum_{i=1}^{n} w_i U(r)
+\label{eq:TPS}
+\end{equation}
+where $r = \sqrt{(x-x_i)^2 + (y-y_i)^2}$ or the euclidean distance between a point and its corresponding target point and $U(r)$ is a radial basis function. The first three terms correspond to the linear part which defines a flat plane that best matches all control points (this can be seen as a least square fitting). In the case that there are only 3 correspondence points, they can all be matched without bending the plane. The last term corresponds to the bending forces provided by n control points and there is a coefficient $w_i$ for each control point.  In the particular case of thin plate spline, this radial basis function, $U(r)$,  is defined as the following:
+
+\begin{equation}
+U(r) = r^2 ln(r)
+\end{equation}
+In order to use thin plate splines, we must first solve for the coefficients $w_i$ and $a_i$. The general equation to solve for the coefficients is the following:
+
+\begin{center}
+	\begin{equation}
+	\begin{bmatrix}
+	K   & P\\
+	P^T & O
+	\end{bmatrix}
+	\begin{bmatrix}
+	w  \\
+	a  
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	v  \\
+	0  
+	\end{bmatrix}
+	\end{equation}
+	\label{eq:TPSLinalg}
+\end{center}
+where the pieces of the first matrix are the following:
+
+\begin{center}
+\begin{equation}
+K_{ij} = 
+\begin{bmatrix}
+	U(r_{11})      & U(r_{12}) &  \dots \\
+	U(r_{21})      & U(r_{22}) &  \dots \\
+	\dots        & \dots   & U(r_{ii})
+\end{bmatrix}
+\end{equation}
+\end{center}
+
+\begin{center}
+	\begin{equation}
+	P = 
+	\begin{bmatrix}
+	1     & x_1 &  y_1 \\
+	1     & x_2 &  y_2 \\
+	      & \vdots &   \\
+	1     & x_i  & y_i
+	\end{bmatrix}
+	\end{equation}
+\end{center}
+$w$ are the radial basis function weights, $a$ are the affine coefficients, and $v$ are the heights of the control points off the plane.  Equation \ref{eq:TPSLinalg} can be solved for the $w$ and $a$ matrix to obtain the thin plate spline coefficients specific to the input control points.  Once these coefficients have been found, all of the other points in the image can be evaluated by passing them through equation \ref{eq:TPS} to obtain the final image. 
