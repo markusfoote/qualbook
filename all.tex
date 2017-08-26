@@ -15,6 +15,8 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+
+
 \definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
 \definecolor{mylilas}{RGB}{170,55,241}
 \lstset{language=Matlab,%
@@ -33,6 +35,7 @@
 	emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
 	%emph=[2]{word1,word2}, emphstyle=[2]{style},    
 }
+\DeclareMathOperator*{\argmin}{argmin}
 \graphicspath{{images/}}
 \pgfplotsset{compat=1.8}
 \addtolength{\oddsidemargin}{-.875in}
@@ -40,6 +43,7 @@
 \addtolength{\textwidth}{1.75in}
 \addtolength{\topmargin}{-.875in}
 \addtolength{\textheight}{1.75in}
+
 
 \titleformat{\chapter}{\normalfont\huge}{\thechapter.}{30pt}{\huge}
 
