@@ -1,9 +1,68 @@
 \section{Convolution and Fourier Transform}
-
-\section{Canny Edge Detection}
+A fundamental property of the Fourier transform is that convolution in time (or space) is equivalent to multiplication in the temporal (or spatial) frequency domain. The inverse, that multiplication in physical space is equivalent to convolution in frequency, is also true. 
+\begin{equation}
+x(t) \circledast h(t) \Longleftrightarrow X(f) \cdot H(f)
+\end{equation}
+\subsection*{Discrete Implementation}
+This property can be useful to speed up image processing, as the computationally-expensive convolution operation can be implemented as a simple element-wise multiplication, with overhead only of a forward and inverse Fourier transform. This is accomplished via the following proceedure:
+\begin{enumerate}
+	\item Given a kernel $h$ and a signal $x$, both in physical space.
+	\item Pad the smaller of the two arrays to the size of the larger.
+	\item Calculate the Fourier transform of both arrays, $H$ and $X$.
+	\item Multiply element-wise the two arrays, so that $Y= H\cdot X$.
+	\item Calculate the inverse transform $y = \mathcal{F}^{-1}( Y )$.
+\end{enumerate}
 
 \section{Filtering with Kernels}
-
-\section{Discrete Derivatives}
-
+Many filters exist that can perform useful operations on images. One such kernel that is popular for de-noising is the Gaussian Blur. This filter simply uses a kernel that represents a Gaussian distribution function. Once the kernel is properly sized for the size of the Gaussian, it is convolved with the image. A manual-approximation estimate for one such kernel might be
+\begin{equation}
+h =\frac{1}{159}\begin{bmatrix} 
+2 & 4 & 5 & 4 & 2 \\
+4 & 9 & 12 & 9 & 4 \\
+5 & 12 & 15 & 12 & 5 \\
+4 & 9 & 12 & 9 & 4 \\
+2 & 4 & 5 & 4 & 2
+\end{bmatrix}
+\end{equation}
+\subsection{Edge Detection}
+Edges in an image can be noticed by filtering with a kernel. Some popular kernels for edge detection include Sobel, Prewitt, and Roberts operators. Each of these produce a Gradient Magnitude and a Direction image.
+\begin{align}
+&\text{Sobel} & \nonumber\\
+&\mathbf{G}_x = \begin{bmatrix} 
++1 & 0 & -1  \\
++2 & 0 & -2 \\
++1 & 0 & -1 
+\end{bmatrix} 
+\quad
+\mathbf{G}_y = \begin{bmatrix} 
++1 & +2 & +1\\
+0 & 0 & 0 \\
+-1 & -2 & -1
+\end{bmatrix} & \\
+&\mathbf{G} = \sqrt{ {\mathbf{G}_x}^2 + {\mathbf{G}_y}^2 }&\\
+&\mathbf{\Theta} = \operatorname{atan}\left({\frac{ \mathbf{G}_y} {\mathbf{G}_x }}\right)&
+\end{align}
+\begin{align}
+ & \text{Prewitt}&\nonumber\\
+& \mathbf{G_x} = \begin{bmatrix} 
++1 & 0 & -1 \\
++1 & 0 & -1 \\
++1 & 0 & -1
+\end{bmatrix} 
+\quad
+\mathbf{G_y} = \begin{bmatrix} 
++1 & +1 & +1 \\
+0 & 0 & 0 \\
+-1 & -1 & -1
+\end{bmatrix}&\\
+&\mathbf{G} = \sqrt{ {\mathbf{G}_x}^2 + {\mathbf{G}_y}^2 }&\\
+&\mathbf{\Theta} = \operatorname{atan2}\left({ \mathbf{G}_y , \mathbf{G}_x }\right)&
+\end{align}
+\subsection{Discrete Derivatives}
+Edge detection is an approximation of the first derivative, or gradient, of an image. 
+The second derivative, of Laplacian, of an image is often calculated by applying the above gradient kernels twice. This can be done by applying the kernel to themselves, for example, the center-difference Sobel operator for the second derivative can be written
+\begin{equation}
+\mathbf{D}^2_{xy}=\begin{bmatrix}0 & 1 & 0\\1 & -4 & 1\\0 & 1 & 0\end{bmatrix}
+\end{equation}
 \section{Median Filter}
+The median filter is a useful filter for de-noising and image that \textbf{cannot} be implemented with convolution. This filter finds the median intensity value for a set region (i.e. kernel size/shape) and replaces the current pixel with that median value. This filter is particularly effective against salt-and-pepper noise.
