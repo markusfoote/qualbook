@@ -11,6 +11,10 @@ where $\circledast$ denotes convolution and:
 	\item $ n(t)$ is some unknown additive noise, independent of $ x(t)$
 	\item $ y(t)$ is our observed signal
 \end{itemize}
+Our goal is to find some $g(t)$ so that we can estimate $x(t)$ as follows:
+\begin{equation}\hat {x}(t)=(g\circledast y)(t)\end{equation}
+where $\hat {x}(t)$ is an estimate of $x(t)$ that minimizes the mean square error.
+
 The Wiener deconvolution filter provides such a $ g(t)$.  The filter is most easily described in the frequency domain:
 \begin{equation}
 G(f) = \frac{H^*(f)S(f)}{ |H(f)|^2 S(f) + N(f) }
@@ -18,7 +22,7 @@ G(f) = \frac{H^*(f)S(f)}{ |H(f)|^2 S(f) + N(f) }
 where:
 \begin{itemize}
 \item $ G(f)$ and $ H(f)$ are the Fourier transforms of $ g$ and $ h$, respectively at frequency $ f $.
-\item $ S(f)$ is the mean [[power spectral density]] of the original signal $ x(t)$
+\item $ S(f)$ is the mean power spectral density of the original signal $ x(t)$
 \item $ N(f)$ is the mean power spectral density of the noise $ n(t)$
 \item the superscript ${}^*$ denotes complex conjugation.
 \end{itemize}
