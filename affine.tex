@@ -1,13 +1,13 @@
 \section{General Transformation Concept}
 
-An \emph{affine transform} is the combination of a \underline{linear} transformation with a \underline{translation}. In a linear algebra contest, a point in space is a column vector of individual values along each dimension, i.e. $\left[\begin{matrix}x\\y\end{matrix}\right]$ or $\left[\begin{matrix}x\\y\\z\end{matrix}\right]$ in 2 or 3 dimensions, respectively. This location is noted simply as $\vec{x}$.
+An \emph{affine transform} is the combination of a \underline{linear} transformation with a \underline{translation}. In a linear algebra context, a point in space is a column vector of individual values along each dimension, i.e. $\left[\begin{matrix}x\\y\end{matrix}\right]$ or $\left[\begin{matrix}x\\y\\z\end{matrix}\right]$ in 2 or 3 dimensions, respectively. This location is noted simply as $\vec{x}$.
 
 The affine transform can thus be written as a matrix-vector multiplication, followed by vector addition:
 \begin{equation}
 \vec{y} = \mathbf{A}\vec{x} + \vec{b}
 \end{equation}
 
-The linear transformation matrix $\mathbf{A}$ has some important special cases:
+The linear transformation matrix $\mathbf{A}$ has some important special cases and properties:
 \begin{description}
 	\item[Scaling] This transformation scales each direction of a vector space by the corresponding $c$ value: $$\mathbf{A}=\left[\begin{matrix}
 	c_x & 0 \\ 0 & c_y
@@ -19,13 +19,15 @@ The linear transformation matrix $\mathbf{A}$ has some important special cases:
 	\cos(\theta) & -\sin(\theta) \\\sin(\theta) & \cos(\theta)
 	\end{matrix}\right]$$ 
 
-	\item[Translation] This only translates all the points by a constant amount:$$\mathbf{A}=\left[\begin{matrix}
+	\item[Identity/Translation] This only translates all the points by a constant amount:$$\mathbf{A}=\left[\begin{matrix}
 	1 & 0 \\0 &1
 	\end{matrix}\right] \text{ and } b=\left[\begin{matrix}t_x\\t_y\end{matrix}\right]$$
 	
-	\item[Skew]
-	
-	\item[Others?]
+	\item[Shearing]
+	$$\mathbf{A}=\left[\begin{matrix}
+	1 & c_x \\c_y &1
+	\end{matrix}\right]$$
+	\item[In General] $A\in \operatorname{GL}\left(n\right)$ which is the General Linear Group, which means that $A$ has nonzero determinant, and is thus invertible.
 	
 \end{description}
 
@@ -64,7 +66,7 @@ First, if we are given $\mathbf{A}$, then
 The variation of T is set to zero because the first derivative of a function is zero at a minimum.
 Solving for $T$:
 \begin{equation}
-T=\frac{1}{n}\sum_{i=1}^N \left(\vec{y}_i-\mathbf{A}\vec{x}_i\right)
+T=\frac{1}{n}\sum_{i=1}^n \left(\vec{y}_i-\mathbf{A}\vec{x}_i\right)
 \end{equation}
 This translation is simply the difference of the centroids of the source and target points. Let us define
 \begin{align}
@@ -90,5 +92,5 @@ Then solving for $\mathbf{A}$:
 \mathbf{A}=\left(\sum_i\tilde{y}_i\tilde{x}_i^T\right)\left(\sum_i\tilde{x}_i\tilde{x}_i^T\right)^{-1}
 \end{equation}
 
-A special note here about the matrix $\sum_i\tilde{x}_i\tilde{x}_i^T$: A minimum of 3 non-co-linear points in 2D (or 4 non-coplanar points in 3D) are required for this matrix to be invertible. 
+A special note here about the matrix $\sum_i\tilde{x}_i\tilde{x}_i^T$: A minimum of 3 non-co-linear points in 2D (or 4 non-coplanar points in 3D) are required for this matrix to be invertible. In general, to guarantee that a solution exists for $A$, you need $n+1$ points.
 

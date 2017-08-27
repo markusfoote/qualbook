@@ -243,7 +243,7 @@ and depending on the $T_E$ and $T_R$ times, the contrast of the image can be cha
 m_z(t) = \underset{\text{initial condition}}{\underbrace{\quad m_{z0}\cos\left(\alpha\right)\quad}}\; e^{\frac{-t}{T_1}} + \underset{\text{final condition}}{\underbrace{\quad m_0\quad}}\left(1-e^{\frac{-t}{T_1}}\right)
 \end{equation}
 
-add graph here
+%ADD graph here
 
 
 \subsection{Spin-Spin Relaxation - T2}
@@ -252,14 +252,14 @@ T_2 << T_1
 \end{equation}
 
 \begin{equation}
-\frac{dm_{xy}}{dt}= \frac{-1}{T_1}m_{xy}
+\frac{dm_{xy}}{dt}= \frac{-1}{T_2}m_{xy}
 \end{equation}
 
 \begin{equation}
 m_{xy}(t) = \underset{\text{initial condition}}{\underbrace{\quad m_{z0}\sin\left(\alpha\right)\quad}}\; e^{\frac{-t}{T_2}}
 \end{equation}
 
-add graph here
+%ADD graph here
 
 \subsection{Dephasing - T2*}
 Same as $T_2$, just faster, due to $B_0$ inhomogeneity, spins dephase in $xy$ plane.
@@ -268,8 +268,8 @@ The $T_1$ and $T_2$ contrast mechanisms are incorporated together in the spin mo
 \begin{align}
 \frac{d\vec{m}}{dt} &= \gamma \vec{m} \times \vec{B}  \\
 \frac{dm_z}{dt}&= \frac{m_0-m_z}{T_1} =\frac{m_z-m_0}{T_1} \\
-\frac{dm_{x}}{dt}&= \frac{-m_{x}}{T_1}  \\
-\frac{dm_{y}}{dt}&= \frac{-m_{y}}{T_1}
+\frac{dm_{x}}{dt}&= \frac{-m_{x}}{T_2}  \\
+\frac{dm_{y}}{dt}&= \frac{-m_{y}}{T_2}
 \end{align}
 These equations are written together as a single vector equation:
 \begin{equation}

@@ -1,51 +1,51 @@
 MRI is a good candidate for CS because the image is naturally formed in a sparse frequency domain. Given the physics of MRI, it is ideal to only downsample in the phase encoding direction, as this direction is time consuming and sampling the frequency encoding direction is cheap.  The trivial inverse Fourier transform reconstruction of a sub-sampled, sparse frequency domain causes significant image artifacts. The most commonly used penalty in Compressed sensing MRI is the total variation penalty, which is the following minimization problem:
 
 \begin{equation}
-E(I(x)) = \argmin_I \int{}\frac{1}{2}||\left(F(I(x)) - d\right)Mg||^{2} \ dx + \int{}\lambda{}\left|\nabla{}I(x)\right| \ dx 
+E(I(x)) = \argmin_I \int{}\frac{1}{2}||\left(F(I(x)) - d\right)M||^{2} \ dx + \int{}\lambda{}\left|\nabla{}I(x)\right| \ dx \label{eq:penergy}
 \end{equation}
-where F($\cdot{}$) denotes the Fourier transform, $I(x)$ is the desired image, $x\in{}X$ denotes a location in a vector space, $\lambda{}$ is a scalar penalty parameter, and M is a mask matrix that nullifies the comparison between the desired image and where there is no data in the frequency domain. For convenience, the Fourier transform will be denoted a matrix, A, throughout the calculations. Substituting A for the Fourier transform and using the dual space formulation of Total Variation, Equation \ref{eq:penergy} can be re-written as:
+where F($\cdot{}$) denotes the Fourier transform, $I(x)$ is the desired image, $x\in{}X$ denotes a location in a vector space, $\lambda{}$ is a scalar penalty parameter, and M is a mask matrix that nullifies the comparison between the desired image and where there is no data in the frequency domain. For convenience, the Fourier transform will be denoted by a matrix, $A$, throughout the calculations. Substituting $A$ for the Fourier transform and using the dual space formulation of Total Variation, Equation \ref{eq:penergy} can be re-written as:
 
 
 \begin{equation}
-D(I(x),w(x)) = \argmin_I  \int{}\frac{1}{2}||(AI(x) - d)M||^{2} \ dx + \left|-\sup_{||{w}_{\infty}||=1}\lambda{}\int{}I(x)div(w(x)) \ dx\right|
+D(I(x),w(x)) = \argmin_I  \int{}\frac{1}{2}||(AI(x) - d)M||^{2} \ dx + \left|-\sup_{||{w}_{\infty}||=1}\lambda{}\int{}I(x)\operatorname{div}(w(x)) \ dx\right|
 \end{equation}
-where $D$ is the energy measured with the dual space of Total Variation. As the first term is not dependent on $w$, the $sup$ operator can be placed in front of the $min$ operator, giving: 
+where $D$ is the energy measured with the dual space of Total Variation. As the first term is not dependent on $w$, the $\sup$ operator can be placed in front of the $\min$ operator, giving: 
 
 \begin{equation}
-D(I(x),w(x)) = \sup_{||{w}_{\infty}||=1}\left[\argmin_I  \int{}\frac{1}{2}||(AI(x) - d)M||^{2} \ dx + \lambda{}\int{}I(x)div(w(x)) \ dx\right]\label{eq:duale}
+D(I(x),w(x)) = \sup_{||{w}_{\infty}||=1}\left[\argmin_I  \int{}\frac{1}{2}||(AI(x) - d)M||^{2} \ dx + \lambda{}\int{}I(x)\operatorname{div}(w(x)) \ dx\right]\label{eq:duale}
 \end{equation}
-The minimization problem inside the $sup$ operator can now be solved by taking the Gateaux derivative with respect to $I(x)$, and assuming a fixed $w(x)$, which is:
+The minimization problem inside the $\sup$ operator can now be solved by taking the Gateaux derivative with respect to $I(x)$, and assuming a fixed $w(x)$, which is:
 
 \begin{equation}
-\frac{\partial{}}{\partial{}\epsilon{}}D(I(x)+\epsilon{}h,w(x))\Big|_{\epsilon=0} = \frac{\partial{}}{\partial{}\epsilon{}}\left[\argmin_I  \int{}\frac{1}{2}||(A(I(x)+\epsilon{}h) - d)M||^{2} \ dx + \lambda{}\int{}(I(x)+\epsilon{}h)div(w(x)) \ dx\right]\Big|_{\epsilon=0}
-\end{equation}
-
-\begin{equation}
-\frac{\partial{}}{\partial{}\epsilon{}}\left[\argmin_I  \int{}\frac{1}{2}||(AI(x)+A\epsilon{}h - d)M||^{2} \ dx + \lambda{}\int{}I(x)div(w(x))+\epsilon{}hdiv(w(x)) \ dx\right]\Big|_{\epsilon=0}
+\frac{\partial{}}{\partial{}\epsilon{}}D(I(x)+\epsilon{}h,w(x))\Big|_{\epsilon=0} = \frac{\partial{}}{\partial{}\epsilon{}}\left[\argmin_I  \int{}\frac{1}{2}||(A(I(x)+\epsilon{}h) - d)M||^{2} \ dx + \lambda{}\int{}(I(x)+\epsilon{}h)\operatorname{div}(w(x)) \ dx\right]\Big|_{\epsilon=0}
 \end{equation}
 
 \begin{equation}
-\int{}(AI(x)+A\epsilon{}h - d)MAh \ dx + \int{}\lambda{}hdiv(w(x)) \ dx\Big|_{\epsilon=0}
+\frac{\partial{}}{\partial{}\epsilon{}}\left[\argmin_I  \int{}\frac{1}{2}||(AI(x)+A\epsilon{}h - d)M||^{2} \ dx + \lambda{}\int{}I(x)\operatorname{div}(w(x))+\epsilon{}h\operatorname{div}(w(x)) \ dx\right]\Big|_{\epsilon=0}
 \end{equation}
 
 \begin{equation}
-\delta_{I(x)} = \int{}(AI(x) - d)MAh \ dx + \int{}\lambda{}hdiv(w(x)) \ dx
+\int{}(AI(x)+A\epsilon{}h - d)MAh \ dx + \int{}\lambda{}h\operatorname{div}(w(x)) \ dx\Big|_{\epsilon=0}
+\end{equation}
+
+\begin{equation}
+\delta_{I(x)} = \int{}(AI(x) - d)MAh \ dx + \int{}\lambda{}h\operatorname{div}(w(x)) \ dx
 \end{equation}
 This can be re-written as the following using the definition of inner product for functions $\left(\langle{}f(x),g(x)\rangle{} = \int{}f(x)g(x)\right)$:
 
 \begin{equation}
-\delta_{I(x)} = \langle{}(AI(x) - d)M,Ah\rangle{} + \langle{}h,\lambda{}div(w(x))\rangle{} 
+\delta_{I(x)} = \langle{}(AI(x) - d)M,Ah\rangle{} + \langle{}h,\lambda{}\operatorname{div}(w(x))\rangle{} 
 \end{equation}
 The inner products can be re-written and combined in the following manner based on the properties of inner products:
 
 \begin{equation}
-\delta_{I(x)} = \langle{}A^t(AI(x) - d)M,h\rangle{} + \langle{}\lambda{}div(w(x)),h\rangle{} \\
-\delta_{I(x)} = \langle{}A^t(AI(x) - d)M + \lambda{}div(w(x)),h\rangle{}\label{eq:tvinnerI}
+\delta_{I(x)} = \langle{}A^t(AI(x) - d)M,h\rangle{} + \langle{}\lambda{}\operatorname{div}(w(x)),h\rangle{} \\
+\delta_{I(x)} = \langle{}A^t(AI(x) - d)M + \lambda{}\operatorname{div}(w(x)),h\rangle{}\label{eq:tvinnerI}
 \end{equation}
 It is necessary for the inner product to equal zero $\forall h\in{}X$ for the energy $D$ to have an extremum in $X$.  The only case that satisfies this condition is that the first argument of the inner product equals 0: 
 
 \begin{equation}
-\delta_{I(x)}  = A^tM\left(AI(x)-d\right) + \lambda{}div(w(x)) = 0\label{eq:tvdeltaI}
+\delta_{I(x)}  = A^tM\left(AI(x)-d\right) + \lambda{}\operatorname{div}(w(x)) = 0\label{eq:tvdeltaI}
 \end{equation}
 Typically, this variation would be used to find a closed form solution for $I(x)$. However, in this case, it would result in an exceptionally complicated equation for subsequent optimization steps. Consequently, the variation of $I(x)$ can be used in a gradient descent algorithm in conjunction with the variation of $w(x)$. The variation of $w(x)$ can be solved for in a similar fashion to that of $I(x)$.  First off, Equation \ref{eq:duale} can be written as the following using that the adjoint of divergence is the negative gradient:
 
