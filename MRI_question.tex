@@ -220,18 +220,18 @@ Spatial encoding of the Larmor frequency via gradient fields also enables select
 	\caption{Diagram indicating effect of increased gradient field strength on slice selection.}\label{fig:mri:sliceselectgradstrength}
 \end{figure} 
 
-Each slice has a different center frequency Fc determined by its position (z) along the slice-select gradient (Gss), given by  
+Each slice has a different center frequency Fc determined by its position $z$ along the slice-select gradient ($G_{ss}$), given by  
 
 \begin{equation}
-	F_c = \gamma(B_0) + z \cdot G_ss = f_0 + \gamma \cdot z \cdot G_ss
+	F_c = \gamma(B_0) + z \cdot G_{ss} = f_0 + \gamma \cdot z \cdot G_{ss}
 \end{equation}
-where $B_0$ is the main magnetic field strength and $f_0$ is its corresponding Larmor frequency.Each slice has a finite width $\Delta z$ and so it contains a range of frequencies ($\Delta f$) centered around $F_C$. These quantities are related by the equation 
+where $B_0$ is the main magnetic field strength and $f_0$ is its corresponding Larmor frequency. Each slice has a finite width $\Delta z$ and so it contains a range of frequencies ($\Delta f$) centered around $F_C$. These quantities are related by the equation 
 
 \begin{equation}
-	\Delta F = \gamma \cdot G_ss \cdot \Delta z
+	\Delta F = \gamma \cdot G_{ss} \cdot \Delta z
 \end{equation}
 
-In common practice $\Delta F$ is held constant (on the order of 1000-2000 Hz) and slice thickness $\Delta z$ is varied by adjusting $G_ss$. Stronger gradients produce thinner slices, and vice versa.
+In common practice $\Delta F$ is held constant (on the order of 1000-2000 Hz) and slice thickness $\Delta z$ is varied by adjusting $G_{ss}$. Stronger gradients produce thinner slices, and vice versa.
 
 \section{MRI Contrast Mechanisms}
 The general signal equation behind MRI signal assuming a 90$^\circ$ pulse is the following:
